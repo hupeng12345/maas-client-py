@@ -5,9 +5,9 @@ from dataclasses import dataclass, field
 
 import httpx
 
-from .hooks import Hooks
+from .hooks import AsyncHooks, Hooks
 
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 DEFAULT_TIMEOUT = 60.0
 DEFAULT_MAX_UPLOAD_SIZE = 100 * 1024 * 1024
 DEFAULT_USER_AGENT = f"maas-client-py/{VERSION}"
@@ -60,6 +60,24 @@ class Config:
     follow_redirects: bool = False
 
 
+@dataclass(slots=True)
+class AsyncConfig:
+    api_key: str
+    base_url: str
+    timeout: float = DEFAULT_TIMEOUT
+    retry: RetryPolicy = field(default_factory=RetryPolicy)
+    poll: PollPolicy = field(default_factory=PollPolicy)
+    max_upload_size: int = DEFAULT_MAX_UPLOAD_SIZE
+    user_agent: str = DEFAULT_USER_AGENT
+    keep_raw: bool = False
+    logger: logging.Logger | None = None
+    hooks: AsyncHooks = field(default_factory=AsyncHooks)
+    http_client: httpx.AsyncClient | None = None
+    stream_http_client: httpx.AsyncClient | None = None
+    transport: httpx.AsyncBaseTransport | None = None
+    follow_redirects: bool = False
+
+
 def default_retry_policy() -> RetryPolicy:
     return RetryPolicy()
 
@@ -78,6 +96,7 @@ __all__ = [
     "PollPolicy",
     "ResponseMeta",
     "Config",
+    "AsyncConfig",
     "default_retry_policy",
     "default_poll_policy",
 ]

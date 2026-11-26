@@ -87,6 +87,6 @@ def test_auth_precedence_and_sdk_headers():
     assert "Authorization" not in headers
     assert headers["X-Custom"] == "yes"
     assert "Empty" not in headers
-    assert headers["User-Agent"] == "maas-client-py/0.1.0"
+    assert headers["User-Agent"] == "maas-client-py/0.2.0"
     assert headers["X-Request-ID"] == "generic"
     assert headers["X-Api-Request-Id"] == "uuid"

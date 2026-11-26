@@ -1,10 +1,12 @@
 from . import asr, ocr, tts
+from .async_client import AsyncClient
 from .client import Client
 from .config import (
     DEFAULT_MAX_UPLOAD_SIZE,
     DEFAULT_TIMEOUT,
     DEFAULT_USER_AGENT,
     VERSION,
+    AsyncConfig,
     Config,
     PollPolicy,
     ResponseMeta,
@@ -12,8 +14,8 @@ from .config import (
     default_poll_policy,
     default_retry_policy,
 )
-from .context import RequestCanceled, RequestContext, RequestDeadlineExceeded, request_id_scope
-from .envelope import Envelope, decode_envelope
+from .context import RequestCanceled, RequestContext, RequestDeadlineExceeded, request_id_scope, run_with_context
+from .envelope import Envelope, decode_envelope, decode_envelope_async
 from .errors import (
     ConfigError,
     Error,
@@ -41,9 +43,9 @@ from .files import (
     file_from_reader,
     file_from_reader_seeker,
 )
-from .hooks import Hooks, PollEvent, RequestEvent, ResponseEvent, RetryEvent
+from .hooks import AsyncHooks, Hooks, PollEvent, RequestEvent, ResponseEvent, RetryEvent
 from .logging import get_logger
-from .multipart import MultipartBody, new_multipart
+from .multipart import AsyncMultipartBody, MultipartBody, new_async_multipart, new_multipart
 from .request_id import (
     HEADER_API_REQUEST_ID,
     HEADER_REQUEST_ID,
@@ -62,6 +64,10 @@ __all__ = [
     "DEFAULT_TIMEOUT",
     "DEFAULT_MAX_UPLOAD_SIZE",
     "DEFAULT_USER_AGENT",
+    "AsyncClient",
+    "AsyncConfig",
+    "AsyncHooks",
+    "AsyncMultipartBody",
     "Client",
     "Config",
     "ConfigError",
@@ -86,6 +92,7 @@ __all__ = [
     "HEADER_REQUEST_ID",
     "as_config_error",
     "decode_envelope",
+    "decode_envelope_async",
     "default_poll_policy",
     "default_retry_policy",
     "file",
@@ -105,6 +112,7 @@ __all__ = [
     "is_timeout",
     "is_too_large",
     "is_unsupported",
+    "new_async_multipart",
     "new_multipart",
     "new_request_id",
     "new_uuid",
@@ -112,5 +120,6 @@ __all__ = [
     "request_id_from_header",
     "request_id_scope",
     "retry_after",
+    "run_with_context",
     "with_request_id",
 ]

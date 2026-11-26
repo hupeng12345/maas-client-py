@@ -1,3 +1,5 @@
+from .async_audio import AsyncAudio
+from .async_tts import AsyncService, AsyncTTSService
 from .audio import Audio
 from .tts import (
     DEFAULT_TTS_PATH,
@@ -21,6 +23,9 @@ from .tts import (
 __all__ = [
     "DEFAULT_TTS_PATH",
     "PATH_SPEECH",
+    "AsyncAudio",
+    "AsyncService",
+    "AsyncTTSService",
     "Audio",
     "Service",
     "SpeechOption",

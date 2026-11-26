@@ -1,3 +1,5 @@
+from .async_service import AsyncASRService, AsyncService
+from .async_session import AsyncSession
 from .config import (
     DEFAULT_ASR_PATH,
     ASRConfig,
@@ -14,7 +16,26 @@ from .service import ASRService, Service
 from .session import Event, EventKind, Result, Session, Utterance
 
 __all__ = [
-    "ASRService", "Service", "Session", "DEFAULT_ASR_PATH", "ASRConfig", "Config", "ASRRequest", "Request",
-    "Audio", "Auth", "Corpus", "Segmentation", "ASRFrame", "encode_frame", "decode_frame", "Event", "EventKind",
-    "Result", "Utterance",
+    "ASRService",
+    "Service",
+    "AsyncASRService",
+    "AsyncService",
+    "Session",
+    "AsyncSession",
+    "DEFAULT_ASR_PATH",
+    "ASRConfig",
+    "Config",
+    "ASRRequest",
+    "Request",
+    "Audio",
+    "Auth",
+    "Corpus",
+    "Segmentation",
+    "ASRFrame",
+    "encode_frame",
+    "decode_frame",
+    "Event",
+    "EventKind",
+    "Result",
+    "Utterance",
 ]

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Callable
+from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
 from urllib.parse import parse_qsl, urlencode
 
@@ -61,6 +61,14 @@ class Hooks:
     on_poll: Callable[[RequestContext, PollEvent], None] | None = None
 
 
+@dataclass(frozen=True, slots=True)
+class AsyncHooks:
+    on_request: Callable[[RequestContext, RequestEvent], Awaitable[None]] | None = None
+    on_response: Callable[[RequestContext, ResponseEvent], Awaitable[None]] | None = None
+    on_retry: Callable[[RequestContext, RetryEvent], Awaitable[None]] | None = None
+    on_poll: Callable[[RequestContext, PollEvent], Awaitable[None]] | None = None
+
+
 def mask_key(key: str) -> str:
     if not key:
         return ""
@@ -72,6 +80,7 @@ def mask_key(key: str) -> str:
 
 
 __all__ = [
+    "AsyncHooks",
     "RequestEvent",
     "ResponseEvent",
     "RetryEvent",

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from .async_service import AsyncOCRService, AsyncService
+from .async_task import AsyncTask
 from .endpoints import (
     PATH_BANK_STATEMENT,
     PATH_FINANCIAL_RECEIPT,
@@ -82,6 +84,9 @@ __all__ = [
     "CardPassport",
     "CardResidenceBook",
     "CardVehicleLic",
+    "AsyncOCRService",
+    "AsyncService",
+    "AsyncTask",
     "IEResult",
     "LayoutBlock",
     "OCROption",
